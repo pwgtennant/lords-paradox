@@ -3,7 +3,7 @@ title: "Lord's Paradox Simulation Code for Tennant et al 2026"
 author: "Peter Tennant"
 ---
 
-**Last updated**: 25 January 2026
+**Last updated**: 13 February 2026
 
 **Github**: <https://github.com/pwgtennant/lords-paradox>
 
@@ -69,6 +69,13 @@ for (package in 1:length(r_packages)) suppressPackageStartupMessages(library(r_p
 #Remove the superfluous lists
 rm(list=c("package", "missing_r_packages", "r_packages"))
 
+# Import python essentials
+py_require(c("dagsim", "numpy", "pandas"))  # near the top of the script
+
+ds <- import("dagsim.base")
+np <- import("numpy")
+pd <- import("pandas")
+
 # Function to convert pandas datagrames to r dataframes
 pandas_to_r <- function(pdf) {
   # Convert to dictionary of lists, then to R data.frame
@@ -90,6 +97,7 @@ Next, we load the necessary Python packages:
 ```{python python-setup}
 
 # Perform check whether any packages are required and install if missing
+
 import subprocess
 import sys
 
